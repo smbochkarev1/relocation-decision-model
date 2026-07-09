@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.Python
+
+# OS
+.DS_Store
+
+# Generated output — but keep the committed example outputs
+output/
+!examples/**/output/

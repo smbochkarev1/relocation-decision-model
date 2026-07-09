@@ -1,0 +1,149 @@
+# =============================================================================
+# criteria.yaml — YOUR relocation model. Edit everything below.
+#
+# This is a TEMPLATE. Replace the placeholder domains/criteria/weights/anchors
+# with your own, list your candidate countries in scores.csv, then run:
+#     python score.py                       # uses this ./config directory
+#
+# Or hand the whole repo to Claude Code and say "set up a relocation model for
+# my situation" — it will interview you and fill these files in. See
+# PROMPT_FOR_CLAUDE.md.
+#
+# For a complete, realistic example see:
+#     examples/eu-relocation-couple/criteria.yaml
+# =============================================================================
+
+# Free-text description of who is relocating and what matters. Used in the report.
+profile: >
+  Describe yourself here: household, passports, languages, work situation,
+  budget, climate preference, deal-breakers, timeline.
+
+# ---------------------------------------------------------------------------
+# Knockout filters — applied BEFORE scoring. A candidate that FAILS any of
+# these is excluded and never scored. Provide pass/fail data per country in
+# knockouts.csv (a column named after each id below). Countries with no row
+# in knockouts.csv are assumed to PASS. Delete this whole section if unused.
+# ---------------------------------------------------------------------------
+knockouts:
+  - id: visa_path
+    label: "A realistic legal residence path exists for your passport"
+  - id: safety_floor
+    label: "Baseline safety: no active conflict / evacuation advisories"
+
+# ---------------------------------------------------------------------------
+# Domains -> criteria. Score each criterion 1-10 (10 = best for you) in
+# scores.csv. Weights are in percent; make them sum to 100 (the engine
+# normalizes by their sum, but 100 keeps the numbers readable).
+#
+# For each criterion, write anchors so scoring is reproducible, not "by feel":
+#   low  = what a 1-3 looks like (weak / dealbreaker-ish)
+#   mid  = what a 4-6 looks like (acceptable)
+#   high = what a 7-10 looks like (strong)
+# "Inverted" metrics (cost, distance, density) must be scored so 10 = best.
+# ---------------------------------------------------------------------------
+domains:
+  - id: A
+    name: "Visa & Legalization"
+    criteria:
+      - id: A1
+        name: "Residence path for your situation"
+        weight: 15
+        anchors:
+          low: "No realistic legal route."
+          mid: "A route exists but slow / costly / fragile."
+          high: "Clear, accessible route."
+        source: "Official immigration portals"
+      - id: A2
+        name: "Path to permanent residence"
+        weight: 10
+        anchors:
+          low: "No PR path."
+          mid: "PR reachable in ~5-8 years."
+          high: "Fast, predictable PR track."
+        source: "Official immigration portals"
+
+  - id: B
+    name: "Money"
+    criteria:
+      - id: B1
+        name: "Cost of living"
+        weight: 15
+        anchors:
+          low: "Eats a critical share of budget."
+          mid: "In line with expectations."
+          high: "Very cheap relative to budget."
+        source: "Numbeo Cost of Living"
+      - id: B2
+        name: "Taxes on your income"
+        weight: 10
+        anchors:
+          low: "Heavily taxed, no relief."
+          mid: "Moderate effective rate."
+          high: "Territorial / near-zero on foreign income."
+        source: "PwC Tax Summaries"
+
+  - id: C
+    name: "Quality of Life"
+    criteria:
+      - id: C1
+        name: "Personal safety"
+        weight: 15
+        anchors:
+          low: "High crime."
+          mid: "Average."
+          high: "Very safe."
+        source: "Numbeo Safety Index; Global Peace Index"
+      - id: C2
+        name: "Healthcare"
+        weight: 15
+        anchors:
+          low: "Poor access/quality."
+          mid: "Adequate."
+          high: "Excellent, affordable."
+        source: "WHO; Numbeo Health Index"
+      - id: C3
+        name: "Climate"
+        weight: 10
+        anchors:
+          low: "Uncomfortable year-round."
+          mid: "Tolerable."
+          high: "Ideal for you."
+        source: "Climate normals"
+
+  - id: D
+    name: "Career"
+    criteria:
+      - id: D1
+        name: "Job / freelance market"
+        weight: 10
+        anchors:
+          low: "Weak market."
+          mid: "Workable."
+          high: "Strong market."
+        source: "Labor market reports"
+
+# ---------------------------------------------------------------------------
+# Sensitivity presets. Each preset overrides a few weights on top of the
+# baseline to test how stable the leader is. Only the listed weights change.
+# ---------------------------------------------------------------------------
+sensitivity:
+  - name: "Baseline"
+    overrides: {}
+  - name: "Visa-first"
+    overrides: {A1: 25, A2: 20}
+  - name: "Money-first"
+    overrides: {B1: 25, B2: 20}
+  - name: "Safety-first"
+    overrides: {C1: 25, C2: 25}
+
+# ---------------------------------------------------------------------------
+# Report metadata (optional).
+# ---------------------------------------------------------------------------
+report:
+  title: "Where to relocate: my scoring model"
+  # leader_note: >
+  #   Optional hand-written headline. If omitted, the engine writes a factual
+  #   one-liner about the leader and the gap to #2.
+  disclaimers:
+    - "Visa rules change frequently — confirm with an immigration lawyer before deciding."
+    - "Index data (Numbeo etc.) is crowd-sourced perception, not audited."

@@ -1,0 +1,293 @@
+# =============================================================================
+# EXAMPLE CONFIG — "EU relocation, couple"
+#
+# This is the author's own decision model, kept as a worked example input.
+# The profile, weights, knockout filters and candidate list below reflect ONE
+# specific situation. Do not treat them as universal advice — they are here so
+# you can run `python score.py --config examples/eu-relocation-couple` and see
+# the whole pipeline produce a real ranking.
+#
+# The scores in scores.csv are already normalized to a 1-10 scale (10 = best
+# for this profile) using min-max normalization across the 36-country sample,
+# so weights express their full range. See README "Design decisions".
+# =============================================================================
+
+profile: >
+  A couple (no kids yet), both hold a single restricting passport, English C1/B1.
+  Mixed work: one remote, one looking locally / freelance. Comfortable budget
+  ~$4-5k/month for two. Mediterranean climate strongly preferred. Kids on the
+  horizon, so schooling and pediatrics carry medium weight.
+
+# ---------------------------------------------------------------------------
+# Knockout filters — applied BEFORE scoring. A candidate failing any of these
+# is excluded and never scored. Pass/fail data lives in knockouts.csv.
+# ---------------------------------------------------------------------------
+knockouts:
+  - id: visa_path
+    label: "Realistic residence path exists for the applicant's passport (digital nomad / passive income / job-seeker)"
+  - id: distance
+    label: "Reachable within ~24h of travel from home hub"
+  - id: safety_floor
+    label: "Baseline safety (not in the red zone of the Global Peace Index; no active conflict / evacuation advisories)"
+  - id: partner_legal
+    label: "Partner has a legal basis to stay (dependent / family visa or own ground)"
+
+# ---------------------------------------------------------------------------
+# Domains -> criteria. Weights are in percent and sum to 100.
+# Anchors describe what a 1-3 / 4-6 / 7-10 score means for THIS profile.
+# ---------------------------------------------------------------------------
+domains:
+  - id: A
+    name: "Visa & Legalization"   # 16%
+    criteria:
+      - id: A1
+        name: "Residence path for remote worker / passive income"
+        weight: 8
+        anchors:
+          low: "No realistic legal route for the applicant's passport."
+          mid: "A route exists but is slow, costly or fragile."
+          high: "Clear, accessible digital-nomad / rentier / job-seeker route."
+        source: "Official immigration portals; Global Citizen Solutions; Citizen Remote"
+      - id: A2
+        name: "Path to permanent residence / citizenship"
+        weight: 4
+        anchors:
+          low: "No PR path, or effectively unreachable."
+          mid: "PR reachable in ~5-8 years with conditions."
+          high: "Fast, predictable PR / citizenship track."
+        source: "Official immigration portals"
+      - id: A3
+        name: "Partner's right to live and work"
+        weight: 4
+        anchors:
+          low: "Partner cannot legally work; dependent status is fragile."
+          mid: "Partner may stay; work rights are limited."
+          high: "Partner has full right to live and work."
+        source: "Official immigration portals"
+
+  - id: B
+    name: "Money & Taxes"   # 17%
+    criteria:
+      - id: B1
+        name: "Cost of living (couple, ex-rent)"
+        weight: 7
+        anchors:
+          low: "Living costs eat a critical share of budget."
+          mid: "In line with expectations."
+          high: "Very cheap relative to the budget."
+        source: "Numbeo Cost of Living; Expatistan"
+      - id: B2
+        name: "Taxes on foreign / remote income"
+        weight: 5
+        anchors:
+          low: "Worldwide income taxed heavily, no relief."
+          mid: "Moderate effective rate."
+          high: "Territorial / near-zero tax on foreign income."
+        source: "PwC Tax Summaries; local tax authority"
+      - id: B3
+        name: "Rent (1-2 bed, decent area)"
+        weight: 5
+        anchors:
+          low: "Rent consumes a critical share of income."
+          mid: "As expected for the budget."
+          high: "Very cheap relative to the budget."
+        source: "Numbeo Rent Index; Expatistan"
+
+  - id: C
+    name: "Quality of Life"   # 24%
+    criteria:
+      - id: C1
+        name: "Personal safety (crime)"
+        weight: 4
+        anchors:
+          low: "High crime / low perceived safety."
+          mid: "Average."
+          high: "Very safe day-to-day."
+        source: "Numbeo Safety Index; Global Peace Index"
+      - id: C2
+        name: "Healthcare (access + quality)"
+        weight: 6
+        anchors:
+          low: "Poor access or quality."
+          mid: "Adequate public + private mix."
+          high: "Excellent, affordable, accessible."
+        source: "WHO; Numbeo Health Index"
+      - id: C3
+        name: "Climate (Mediterranean preferred)"
+        weight: 5
+        anchors:
+          low: "Extreme heat/humidity or harsh winter."
+          mid: "Subtropical / mild temperate."
+          high: "Mediterranean: hot dry summer, mild wet winter."
+        source: "Climate normals; Numbeo Climate Index"
+      - id: C4
+        name: "Environment / air quality"
+        weight: 2
+        anchors:
+          low: "Chronic pollution."
+          mid: "Acceptable."
+          high: "Clean air, low pollution."
+        source: "Numbeo Pollution Index; IQAir/AQI"
+      - id: C5
+        name: "Political stability"
+        weight: 3
+        anchors:
+          low: "History of coups / high destabilization risk."
+          mid: "Broadly stable; protests / government turnover possible."
+          high: "Very durable regime, consistent policy (democratic or not)."
+        source: "World Bank Political Stability index; EIU Democracy Index; Freedom House"
+      - id: C6
+        name: "Geopolitical risk (3-5 yr horizon)"
+        weight: 4
+        anchors:
+          low: "Direct threat: occupied territory, alliance exposure, recent precedents."
+          mid: "Grey zone; moderate external influence."
+          high: "In a defensive alliance and far from conflict."
+        source: "NATO/CSTO membership; conflict history; public risk analysis"
+
+  - id: D
+    name: "Society & Culture"   # 9%
+    criteria:
+      - id: D1
+        name: "Cultural closeness"
+        weight: 3
+        anchors:
+          low: "Large cultural distance on both Inglehart axes."
+          mid: "Moderate distance."
+          high: "Culturally close / easy to blend in."
+        source: "World Values Survey / Inglehart-Welzel map"
+      - id: D2
+        name: "Friendliness toward migrants"
+        weight: 3
+        anchors:
+          low: "Cold or hostile to newcomers."
+          mid: "Neutral."
+          high: "Warm, welcoming to expats."
+        source: "WVS; InterNations Expat Insider"
+      - id: D3
+        name: "Language barrier (given EN C1/B1)"
+        weight: 2
+        anchors:
+          low: "Little English; hard local language."
+          mid: "Manageable with effort."
+          high: "Widely spoken English / easy language."
+        source: "EF English Proficiency Index"
+      - id: D4
+        name: "Russian-speaking community"
+        weight: 1
+        anchors:
+          low: "Essentially none."
+          mid: "Some presence."
+          high: "Large, active community."
+        source: "Community estimates"
+
+  - id: E
+    name: "Career & Work"   # 15%
+    criteria:
+      - id: E1
+        name: "Job market / freelance opportunities"
+        weight: 9
+        anchors:
+          low: "Weak local market, hard to freelance."
+          mid: "Workable."
+          high: "Strong market / thriving freelance scene."
+        source: "Labor market reports; expat job boards"
+      - id: E2
+        name: "Diploma recognition / hiring ease"
+        weight: 6
+        anchors:
+          low: "Diplomas hard to recognize; hiring barriers high."
+          mid: "Doable with paperwork."
+          high: "Smooth recognition and hiring."
+        source: "Official recognition frameworks"
+
+  - id: F
+    name: "Logistics"   # 5%
+    criteria:
+      - id: F1
+        name: "Distance from home hub"
+        weight: 3
+        anchors:
+          low: ">24h travel."
+          mid: "~1 layover, 12-16h."
+          high: "Direct flight <=8h."
+        source: "Rome2rio travel times / routes"
+      - id: F2
+        name: "Travel connectivity (ease of trips, travel visas)"
+        weight: 2
+        anchors:
+          low: "Poorly connected; visa-heavy for onward travel."
+          mid: "Average."
+          high: "Well connected; easy onward travel."
+        source: "Passport index; flight connectivity"
+
+  - id: G
+    name: "Lifestyle"   # 14%
+    criteria:
+      - id: G1
+        name: "Food (quality, variety, availability)"
+        weight: 4
+        anchors:
+          low: "Limited quality or variety."
+          mid: "Fine."
+          high: "Excellent, varied, accessible."
+        source: "Author assessment"
+      - id: G2
+        name: "Population density comfort"
+        weight: 2
+        anchors:
+          low: "Overcrowded or empty."
+          mid: "Slightly off ideal."
+          high: "Comfortable density."
+        source: "Population density data"
+      - id: G3
+        name: "Entertainment / leisure"
+        weight: 4
+        anchors:
+          low: "Little to do."
+          mid: "Adequate."
+          high: "Rich leisure / nightlife / culture."
+        source: "Author assessment"
+      - id: G4
+        name: "Nature & domestic travel"
+        weight: 4
+        anchors:
+          low: "Little variety."
+          mid: "Some options."
+          high: "Diverse nature and destinations."
+        source: "Author assessment"
+
+# ---------------------------------------------------------------------------
+# Sensitivity presets. Each preset overrides a few weights on top of the
+# baseline to test how stable the leader is. Only listed weights change.
+# ---------------------------------------------------------------------------
+sensitivity:
+  - name: "Baseline"
+    overrides: {}
+  - name: "Visa-first"
+    overrides: {A1: 18, A2: 7, A3: 6, E1: 5, E2: 3, G3: 2, G4: 2}
+  - name: "Money-first"
+    overrides: {B1: 11, B2: 10, B3: 9, D1: 1, D4: 1, G3: 2, G2: 1}
+  - name: "Safety-first"
+    overrides: {C5: 9, C6: 8, C1: 6, C2: 4, A2: 2, D4: 1, G3: 2}
+  - name: "Lifestyle-first"
+    overrides: {G1: 8, G3: 8, G4: 8, C3: 8, A2: 2, E2: 3, F2: 1}
+
+# ---------------------------------------------------------------------------
+# Report metadata.
+# ---------------------------------------------------------------------------
+report:
+  title: "Where to relocate: scoring 36 countries for a couple"
+  leader_note: >
+    Georgia comes first (6.66), with Portugal and Spain effectively tied at 6.56
+    and 6.55 (0.01 apart). The Georgia-Portugal gap is only 0.10 — small but it
+    holds across every sensitivity scenario. Georgia wins on visa access, cost and
+    taxes but carries the worst geopolitical-risk score (C6=2). Portugal is the
+    author's favorite and is fully validated by the model: NATO, stable democracy,
+    the best climate in the sample. Under the "Safety-first" scenario Georgia drops
+    out of the top and NATO members lead.
+  disclaimers:
+    - "Absolute scores are min-max normalized across the 36-country sample (best on each criterion = 10, worst = 1). Compare ranks, not raw numbers, against other versions."
+    - "C5/C6 are author estimates built on public indices (Freedom House, World Bank Political Stability, NATO/CSTO membership); revisit after major geopolitical shifts."
+    - "Visa rules change frequently — confirm with an immigration lawyer before deciding."
+    - "Numbeo indices are crowd-sourced perception, not audited. Estimated data rows: Montenegro, Bahrain, Kyrgyzstan."
