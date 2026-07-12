@@ -1,5 +1,9 @@
 # relocation-decision-model
 
+[![tests](https://github.com/smbochkarev1/relocation-decision-model/actions/workflows/tests.yml/badge.svg)](https://github.com/smbochkarev1/relocation-decision-model/actions/workflows/tests.yml)
+&nbsp;![python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
+&nbsp;![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)
+
 A small, configurable framework for choosing **where to relocate** with weighted
 multi-criteria scoring instead of gut feeling. You define the criteria that matter
 to *you*, weight them, score each candidate country 1–10, and the engine ranks
@@ -145,6 +149,32 @@ your own candidate set and priorities.
 | Cultural closeness | [World Values Survey](https://www.worldvaluessurvey.org) / Inglehart–Welzel map |
 | Language | [EF English Proficiency Index](https://www.ef.com/epi) |
 | Travel distance | [Rome2rio](https://www.rome2rio.com) |
+
+## 7. Tests
+
+The scoring core is covered by a pytest suite (`tests/test_scoring.py`) that pins
+each function to a known answer — weighted-average normalization, the zero-weight
+guard, score-descending order with alphabetical tie-breaks, and 2-dp rounding —
+plus an integration test that loads and ranks the bundled example config. It runs
+offline with no network or credentials, and in CI on every push (see the badge above).
+
+```bash
+pip install -r requirements.txt pytest
+pytest -q
+```
+
+## 8. Limitations
+
+- **Garbage in, garbage out.** The engine is honest arithmetic over *your* 1–10
+  scores; a biased or lazily-filled `scores.csv` produces a confident wrong ranking.
+  The written anchors exist to fight this, not eliminate it.
+- **Not immigration advice.** Visa rules change and can be affected by sanctions —
+  the model ranks options, it doesn't confirm you qualify. Verify with a lawyer.
+- **Relative, single-decision-maker scoring.** Scores are relative to *your*
+  candidate set and priorities; two people will weight and score differently, and
+  that's expected. There's no "objective" country ranking here.
+- **Sensitivity ≠ certainty.** Reweighting presets show how fragile a leader is;
+  they don't tell you which weighting is *correct* — that judgement stays yours.
 
 ## Repository layout
 
