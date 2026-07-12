@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where to relocate, 2026 — deck</title>
+<style>
+  :root{
+    --navy:#1e1b4b; --primary:#312e81; --accent:#4f46e5; --accent2:#6366f1;
+    --amber:#f59e0b; --ink:#1a1f36; --muted:#8a94a6; --lightbg:#f5f5fb;
+    --line:#e4e7ec; --ok:#067647; --warn:#b54708; --alert:#b42318;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#0f0d24;font-family:Arial,Helvetica,sans-serif;color:var(--ink);
+       overflow:hidden;height:100vh;width:100vw;position:relative}
+  .serif{font-family:Georgia,'Times New Roman',serif}
+  a{color:inherit}
+
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:20;height:52px;display:flex;align-items:center;gap:14px;padding:0 18px;
+       background:#161334;color:#c7c9f2;font-size:13px;white-space:nowrap;overflow:hidden}
+  .topbar .t{font-weight:700;color:#fff}
+  .topbar .hint{color:#6b68a0;font-size:12px;overflow:hidden;text-overflow:ellipsis}
+  .topbar .sp{flex:1}
+  .topbar a{color:#c7c9f2;text-decoration:none;border:1px solid #2c2960;border-radius:7px;padding:6px 11px;flex:0 0 auto}
+  .topbar a:hover{background:#201c47;color:#fff}
+  .topbar a.dl{background:var(--accent);border-color:var(--accent);color:#fff}
+  @media(max-width:720px){ .topbar .hint{display:none} }
+
+  .stage{position:fixed;top:52px;bottom:52px;left:0;right:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .scaler{width:1280px;height:720px;position:relative;transform-origin:center center}
+  .slide{position:absolute;inset:0;background:#fff;overflow:hidden;display:none;border-radius:4px}
+  .slide.on{display:block}
+
+  .ttl{position:absolute;left:64px;top:50px;right:64px}
+  .ttl h2{font-size:36px;line-height:1.15;color:var(--ink);font-weight:700;letter-spacing:-.5px}
+  .ttl .rule{width:64px;height:5px;background:var(--accent);margin-top:15px;border-radius:3px}
+  .src{position:absolute;left:64px;bottom:28px;right:64px;font-size:13.5px;color:var(--muted)}
+
+  .cover{background:var(--navy);color:#fff}
+  .cover .glow{position:absolute;right:-140px;top:-160px;width:540px;height:540px;border-radius:50%;
+       background:radial-gradient(circle,rgba(99,102,241,.34),transparent 70%)}
+  .cover .eyebrow{position:absolute;left:72px;top:118px;font-size:19px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);font-weight:700}
+  .cover h1{position:absolute;left:72px;top:186px;right:96px;font-size:58px;line-height:1.12;font-weight:700;letter-spacing:-1px}
+  .cover .subt{position:absolute;left:72px;top:474px;right:150px;font-size:23px;color:#c7c9f2;line-height:1.45}
+  .cover .bar2{position:absolute;left:72px;bottom:96px;width:120px;height:8px;background:var(--amber);border-radius:4px}
+  .cover .foot{position:absolute;left:72px;bottom:56px;font-size:17px;color:#9a9cd8}
+
+  .section{background:var(--navy);color:#fff}
+  .section h2{position:absolute;left:80px;top:200px;right:110px;font-size:46px;line-height:1.15;font-weight:700;letter-spacing:-.5px}
+  .section .rule{position:absolute;left:82px;top:170px;width:64px;height:5px;background:var(--amber);border-radius:3px}
+  .section .subt{position:absolute;left:82px;top:452px;right:130px;font-size:22px;color:#c7c9f2;line-height:1.45}
+
+  .q h2{font-size:40px}
+  .chips{position:absolute;left:64px;right:64px;top:250px;display:flex;gap:16px;flex-wrap:wrap}
+  .chip{background:var(--lightbg);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:20px 22px;flex:1;min-width:220px}
+  .chip b{display:block;font-size:21px;color:var(--primary);margin-bottom:6px}
+  .chip span{font-size:15px;color:#55607a;line-height:1.4}
+  .formula{position:absolute;left:64px;right:64px;bottom:110px;font-size:18px;color:var(--ink);background:#eef2ff;border-radius:10px;padding:16px 20px;text-align:center;font-weight:600}
+  .formula em{color:var(--accent);font-style:normal}
+
+  .cards{position:absolute;left:64px;right:64px;top:180px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:var(--lightbg);border:1px solid var(--line);border-radius:14px;padding:26px 24px;position:relative;overflow:hidden;min-height:360px}
+  .card .top{position:absolute;left:0;top:0;height:6px;width:100%;background:var(--accent)}
+  .pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 11px;border-radius:20px;margin-bottom:14px}
+  .pill.ok{color:var(--ok);background:#ecfdf3}.pill.prog{color:var(--accent);background:#eef2ff}.pill.risk{color:var(--alert);background:#fef3f2}
+  .card h3{font-size:21px;color:var(--ink);margin-bottom:12px}
+  .card p{font-size:16px;color:#55607a;line-height:1.5}
+  .card .names{margin-top:12px;font-size:15px;color:var(--ink);font-weight:600;line-height:1.6}
+
+  .two{position:absolute;left:64px;right:64px;top:196px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .two .card{min-height:320px}
+  .two .card p{white-space:pre-line}
+
+  table{position:absolute;left:64px;right:64px;top:186px;border-collapse:collapse;width:calc(100% - 128px);font-size:18px}
+  th{background:var(--primary);color:#fff;text-align:left;padding:12px 18px;font-weight:700;font-size:15px}
+  th.n,td.n{text-align:center}
+  td{padding:11px 18px;color:var(--ink);border-bottom:1px solid var(--line)}
+  tr:nth-child(even) td{background:var(--lightbg)}
+  td.rk{font-weight:700;color:var(--primary);font-family:Georgia,serif}
+  tr:first-child td.rk{color:var(--accent)}
+  .star{color:var(--amber)}
+
+  .chart{position:absolute;left:80px;right:80px;top:220px;bottom:118px;display:flex;align-items:flex-end;gap:26px;border-bottom:2px solid var(--line)}
+  .bw{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .bv{font-size:20px;font-weight:700;color:var(--ink);margin-bottom:9px;font-family:Georgia,serif}
+  .bar{width:100%;max-width:96px;background:var(--primary);border-radius:7px 7px 0 0}
+  .bar.hi{background:var(--amber)}
+  .xrow{position:absolute;left:80px;right:80px;bottom:84px;display:flex;gap:26px}
+  .xrow div{flex:1;text-align:center;font-size:14px;color:var(--muted);font-weight:600}
+
+  .ctrl{position:fixed;bottom:0;left:0;right:0;z-index:20;height:52px;display:flex;align-items:center;justify-content:center;gap:18px;background:#161334;color:#c7c9f2;font-size:13px}
+  .ctrl button{background:#201c47;color:#fff;border:1px solid #2c2960;border-radius:8px;padding:7px 16px;font-size:14px;cursor:pointer}
+  .ctrl button:hover{background:var(--accent);border-color:var(--accent)}
+  .ctrl .cnt{min-width:56px;text-align:center;font-variant-numeric:tabular-nums}
+  .ctrl .hint{color:#6b68a0;font-size:12px}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="t">Where to relocate · 2026</span>
+    <span class="hint">built with spec-to-deck from the relocation-decision-model report</span>
+    <span class="sp"></span>
+    <a href="../">← Interactive report</a>
+    <a class="dl" href="relocation-deck.pptx">Download .pptx</a>
+  </div>
+
+  <div class="stage">
+    <div class="scaler" id="scaler">
+
+      <!-- 1 cover -->
+      <section class="slide cover on">
+        <div class="glow"></div>
+        <div class="eyebrow">relocation-decision-model · worked example</div>
+        <h1 class="serif">Where to relocate: 36 countries scored, legalization mapped</h1>
+        <div class="subt">From a weighted decision model to the routes that actually work — a couple on Russian passports, 2026.</div>
+        <div class="bar2"></div>
+        <div class="foot">Not immigration advice · data as of 2026 · verify with a lawyer</div>
+      </section>
+
+      <!-- 2 method -->
+      <section class="slide q">
+        <div class="ttl"><h2>One model, two questions: is it a good fit — and can you get in?</h2><div class="rule"></div></div>
+        <div class="chips">
+          <div class="chip"><b>Fit — the score</b><span>24 criteria across 7 domains (visa · money · quality of life · society · career · logistics · lifestyle), weighted to one 0–10 score.</span></div>
+          <div class="chip"><b>Access — legalization</b><span>A sourced 2026 review of five routes per country: residence · golden visa · citizenship-by-investment · mortgage · naturalization.</span></div>
+          <div class="chip"><b>Safety — the filter</b><span>Crime, political stability and geopolitical risk — the lens that reshuffles the ranking.</span></div>
+        </div>
+        <div class="formula">Score ranks the fit · legalization says who's <em>open</em> · safety decides where you'd actually want to be</div>
+      </section>
+
+      <!-- 3 top ranking -->
+      <section class="slide">
+        <div class="ttl"><h2>The score ranks fit — Georgia, Portugal and Spain lead</h2><div class="rule"></div></div>
+        <table>
+          <tr><th class="n">#</th><th>Country</th><th>Region</th><th class="n">Score</th><th>Why it ranks</th></tr>
+          <tr><td class="rk n">1</td><td>Georgia</td><td>Caucasus/Gulf</td><td class="n">6.66</td><td>Cheapest, easiest residence — but worst on geopolitics</td></tr>
+          <tr><td class="rk n">2</td><td>Portugal ★</td><td>Europe/Med</td><td class="n">6.56</td><td>Safe, high quality of life, a real EU route</td></tr>
+          <tr><td class="rk n">3</td><td>Spain ★</td><td>Europe/Med</td><td class="n">6.55</td><td>Effectively tied with Portugal</td></tr>
+          <tr><td class="rk n">4</td><td>Turkey</td><td>Caucasus/Gulf</td><td class="n">6.44</td><td>Working investment-citizenship, strong job market</td></tr>
+          <tr><td class="rk n">5</td><td>UAE ★</td><td>Caucasus/Gulf</td><td class="n">6.30</td><td>Safe, zero-tax base; easy visa, no passport path</td></tr>
+          <tr><td class="rk n">6</td><td>Mexico</td><td>LatAm</td><td class="n">6.18</td><td>Accessible residence, 5-year naturalization</td></tr>
+        </table>
+        <div class="src">★ = also in the “easy + safe” shortlist · full 36-country ranking in the interactive report</div>
+      </section>
+
+      <!-- 4 legalization landscape -->
+      <section class="slide">
+        <div class="ttl"><h2>But the passport rewrites the map — legalization is uneven</h2><div class="rule"></div></div>
+        <div class="cards">
+          <div class="card"><div class="top" style="background:var(--ok)"></div><span class="pill ok">Citizenship works</span>
+            <p>Functioning investment-citizenship for Russian passports today is rare.</p>
+            <div class="names">🇹🇷 Turkey — $400k real estate<br>🇬🇪 Georgia — discretionary €300k</div></div>
+          <div class="card"><div class="top" style="background:var(--accent)"></div><span class="pill prog">Residence open</span>
+            <p>Digital-nomad, rentista and business routes stay open across LatAm, the Balkans, Asia and the Gulf — income thresholds, not blockers.</p>
+            <div class="names">🇺🇾 🇦🇷 🇧🇷 🇹🇭 🇷🇸 🇦🇪 🇬🇪 …</div></div>
+          <div class="card"><div class="top" style="background:var(--alert)"></div><span class="pill risk">Closed for RF</span>
+            <p>Six destinations are effectively shut for Russians (visa centers / sanctions / CBI bans).</p>
+            <div class="names">🇨🇿 Czechia · 🇮🇹 Italy · 🇬🇷 Greece<br>🇵🇦 Panama · 🇲🇹 Malta · 🇬🇩 Grenada</div></div>
+        </div>
+        <div class="src">Source: sourced 2026 legalization review — each fact linked in the interactive report</div>
+      </section>
+
+      <!-- 5 easy+safe chart -->
+      <section class="slide">
+        <div class="ttl"><h2>The payoff: 11 countries both open to enter and safe</h2><div class="rule"></div></div>
+        <div class="chart">
+          <div class="bw"><div class="bv">8.9</div><div class="bar hi" style="height:89%"></div></div>
+          <div class="bw"><div class="bv">8.8</div><div class="bar" style="height:88%"></div></div>
+          <div class="bw"><div class="bv">8.5</div><div class="bar" style="height:85%"></div></div>
+          <div class="bw"><div class="bv">8.5</div><div class="bar" style="height:85%"></div></div>
+          <div class="bw"><div class="bv">8.4</div><div class="bar" style="height:84%"></div></div>
+          <div class="bw"><div class="bv">8.1</div><div class="bar" style="height:81%"></div></div>
+          <div class="bw"><div class="bv">7.7</div><div class="bar" style="height:77%"></div></div>
+          <div class="bw"><div class="bv">7.6</div><div class="bar" style="height:76%"></div></div>
+        </div>
+        <div class="xrow"><div>UAE</div><div>Qatar</div><div>Croatia</div><div>Slovenia</div><div>Portugal</div><div>Spain</div><div>Uruguay</div><div>Costa&nbsp;Rica</div></div>
+        <div class="src">Safety index (crime · stability · geopolitics), 0–10 · “easy + safe” = open residence route for RF × safety ≥ 6.5 · +Cyprus, Vietnam, Bahrain</div>
+      </section>
+
+      <!-- 6 trade-off -->
+      <section class="slide">
+        <div class="ttl"><h2>Fit, access and safety point at different countries</h2><div class="rule"></div></div>
+        <div class="two">
+          <div class="card"><div class="top"></div><h3>The trade-off</h3>
+            <p>Georgia tops the score but scores worst on geopolitics.
+Portugal &amp; Spain are safe and pleasant — but naturalization just moved 5 → 10 years.
+UAE is safe with an easy visa — yet has no path to a passport at all.</p></div>
+          <div class="card"><div class="top" style="background:var(--amber)"></div><h3>Why keep them separate</h3>
+            <p>A single ranking hides this tension.
+Scoring <b>fit</b>, legalization <b>access</b> and <b>safety</b> as three lenses is what turns a wish-list into a decision — and lets you re-weight for your own risk tolerance.</p></div>
+        </div>
+      </section>
+
+      <!-- 7 three plays -->
+      <section class="slide">
+        <div class="ttl"><h2>The shortlist splits into three plays</h2><div class="rule"></div></div>
+        <div class="cards">
+          <div class="card"><div class="top" style="background:var(--accent)"></div><span class="pill prog">Base now</span>
+            <p>Cheapest, fastest residence to get legal quickly while you scout.</p>
+            <div class="names">🇬🇪 Georgia — lowest cost<br>🇦🇪 UAE — safe, zero-tax base</div></div>
+          <div class="card"><div class="top" style="background:var(--ok)"></div><span class="pill ok">EU path</span>
+            <p>Safe, high quality of life, a real (if now 10-year) route to an EU passport — the long game.</p>
+            <div class="names">🇵🇹 Portugal · 🇪🇸 Spain<br>🇭🇷 Croatia · 🇸🇮 Slovenia</div></div>
+          <div class="card"><div class="top" style="background:var(--amber)"></div><span class="pill" style="color:var(--warn);background:#fffaeb">Passport play</span>
+            <p>If a second passport is the goal, only two routes work for RF today.</p>
+            <div class="names">🇹🇷 Turkey — 6–12 mo<br>🇬🇪 Georgia — discretionary</div></div>
+        </div>
+        <div class="src">Buckets are illustrative — re-weight the model for your own priorities</div>
+      </section>
+
+      <!-- 8 insight -->
+      <section class="slide section">
+        <div class="rule"></div>
+        <h2 class="serif">The best country to score is rarely the best to enter — or the safest</h2>
+        <div class="subt">The model's real output isn't a single winner. It's three ranked lenses — fit, legalization access, and safety — you weigh for your own situation. That's what makes a high-stakes, emotional decision auditable.</div>
+      </section>
+
+      <!-- 9 close -->
+      <section class="slide cover">
+        <div class="glow"></div>
+        <h1 class="serif" style="top:240px;font-size:50px">Interactive report + framework<br>on GitHub</h1>
+        <div class="subt" style="top:470px">github.com/smbochkarev1/relocation-decision-model &nbsp;·&nbsp; smbochkarev1.github.io/relocation-decision-model</div>
+        <div class="bar2"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="ctrl">
+    <button id="prev">‹ Prev</button>
+    <span class="cnt" id="cnt">1 / 9</span>
+    <button id="next">Next ›</button>
+    <span class="hint">← → or Space to navigate</span>
+  </div>
+
+<script>
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var i=0, n=slides.length;
+  function show(k){
+    i=Math.max(0,Math.min(n-1,k));
+    slides.forEach(function(s,j){ s.classList.toggle('on', j===i); });
+    document.getElementById('cnt').textContent=(i+1)+' / '+n;
+    if(history.replaceState) history.replaceState(null,'','#'+(i+1));
+  }
+  function fit(){
+    var st=document.querySelector('.stage');
+    var s=Math.min(st.clientWidth/1280, st.clientHeight/720);
+    document.getElementById('scaler').style.transform='scale('+s+')';
+  }
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.querySelector('.stage').onclick=function(e){ if(e.target.closest('a'))return; show(i+1); };
+  window.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
+    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(n-1);}
+  });
+  window.addEventListener('resize',fit);
+  var h=parseInt((location.hash||'').replace('#',''),10);
+  fit(); show(isNaN(h)?0:h-1);
+</script>
+</body>
+</html>

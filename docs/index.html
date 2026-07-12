@@ -1802,6 +1802,7 @@ function censusTag(y){
   if(y==null||y==='') return '<span class="tag slate">—</span>';
   var n=parseInt(y,10);
   if(isNaN(n)) return '<span class="tag slate">'+esc(y)+'</span>';
+  if(n===0) return '<span class="tag slate">no path</span>';
   var cls=n<=5?'ok':n<=8?'warn':'bad';
   return '<span class="tag '+cls+'">'+n+' yrs</span>';
 }
@@ -1821,7 +1822,7 @@ function passFilter(r){
   if(filters.easy_safe && !r.easy_safe) return false;
   if(filters.cbi && (!r.passport||/^none$|^no$|^—$/i.test(r.passport))) return false;
   if(filters.mortgage && !/yes/i.test(r.mortgage_flag||'')) return false;
-  if(filters.fast){var n=parseInt(r.census_years,10); if(isNaN(n)||n>5) return false;}
+  if(filters.fast){var n=parseInt(r.census_years,10); if(isNaN(n)||n<1||n>5) return false;}
   if(filters.open && !(r.rp_access&&r.rp_access.indexOf('open')===0)) return false;
   if(filters.closed && r.rp_access!=='closed-for-RF') return false;
   return true;

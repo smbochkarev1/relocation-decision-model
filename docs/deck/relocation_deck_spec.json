@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "Where to relocate — scoring 36 countries + legalization",
+    "audience": "A couple on Russian passports, 2026",
+    "arc": "Decision readout",
+    "deck_type": "review",
+    "dark": true,
+    "filename": "relocation-decision-model_2026.pptx"
+  },
+  "slides": [
+    {
+      "layout": "title",
+      "action_title": "Where to relocate: 36 countries scored, legalization mapped",
+      "idea": "From a weighted decision model to the routes that actually work — a couple on Russian passports, 2026"
+    },
+    {
+      "layout": "key_insight",
+      "action_title": "One model, two questions: is it a good fit — and can you actually get in?",
+      "idea": "Weighted score across 24 criteria / 7 domains, joined with a sourced 2026 legalization review (residence · golden visa · citizenship · mortgage · naturalization)"
+    },
+    {
+      "layout": "text_3",
+      "action_title": "The score ranks fit — Georgia, Portugal and Spain lead",
+      "table": {
+        "columns": ["Country", "Region", "Score"],
+        "rows": [
+          ["Georgia", "Caucasus/Gulf", "6.66"],
+          ["Portugal", "Europe/Med", "6.56"],
+          ["Spain", "Europe/Med", "6.55"],
+          ["Turkey", "Caucasus/Gulf", "6.44"],
+          ["UAE", "Caucasus/Gulf", "6.30"],
+          ["Mexico", "LatAm", "6.18"],
+          ["Thailand", "Asia", "6.10"],
+          ["Serbia", "Europe/Med", "6.04"]
+        ]
+      },
+      "sources": ["relocation-decision-model — 36 countries, 24 weighted criteria"]
+    },
+    {
+      "layout": "text_3",
+      "action_title": "But the passport rewrites the map — legalization is uneven",
+      "blocks": [
+        {"status": "DONE", "heading": "Citizenship that works for RF", "body": "Only Turkey ($400k real estate) and Georgia (discretionary €300k) run functioning investment-citizenship for Russians today."},
+        {"status": "IN_PROGRESS", "heading": "Residence is broadly open", "body": "Digital-nomad, rentista and business routes stay open across LatAm, the Balkans, Asia and the Gulf — income thresholds, not blockers."},
+        {"status": "BLOCKED", "heading": "Closed for RF", "body": "6 destinations are effectively shut for Russians: Czechia, Italy, Greece, Panama, Malta, Grenada (Caribbean CBI)."}
+      ],
+      "sources": ["sourced 2026 legalization review — see the interactive report"]
+    },
+    {
+      "layout": "blank",
+      "action_title": "The payoff: 11 countries that are both open to enter and safe",
+      "chart": {
+        "type": "column",
+        "highlight": "UAE",
+        "series": [
+          {"label": "UAE", "value": 8.9},
+          {"label": "Qatar", "value": 8.8},
+          {"label": "Croatia", "value": 8.5},
+          {"label": "Slovenia", "value": 8.5},
+          {"label": "Portugal", "value": 8.4},
+          {"label": "Spain", "value": 8.1},
+          {"label": "Uruguay", "value": 7.7},
+          {"label": "Costa Rica", "value": 7.6}
+        ]
+      },
+      "sources": ["“easy + safe” = an open residence route for RF × high safety/stability score (top 8 of 11 shown)"]
+    },
+    {
+      "layout": "text_2",
+      "action_title": "Fit, access and safety point at different countries",
+      "blocks": [
+        {"heading": "The trade-off", "body": "Georgia tops the score but scores worst on geopolitics. Portugal/Spain are safe and pleasant but naturalization just moved to 10 years. UAE is safe with an easy visa — but no path to a passport."},
+        {"heading": "Why separate them", "body": "A single ranking hides this. Scoring fit, legalization access and safety as three lenses is what turns a wish-list into a decision."}
+      ]
+    },
+    {
+      "layout": "text_2",
+      "action_title": "The shortlist splits into three plays",
+      "blocks": [
+        {"status": "AHEAD", "heading": "Base now — Georgia / UAE", "body": "Cheapest, fastest residence; Georgia for cost, UAE for a safe tax base while you scout. Neither is the end state."},
+        {"status": "ON_TRACK", "heading": "EU path — Portugal / Spain", "body": "Safe, high quality of life, a real (if now 10-year) route to an EU passport. The long game."}
+      ]
+    },
+    {
+      "layout": "section",
+      "action_title": "The best country to score is rarely the best to enter — or the safest",
+      "idea": "The model's real output isn't a winner; it's three ranked lenses — fit, access, safety — you can weigh for your own situation."
+    },
+    {
+      "layout": "contacts",
+      "action_title": "Interactive report + framework on GitHub",
+      "idea": "github.com/smbochkarev1/relocation-decision-model · smbochkarev1.github.io/relocation-decision-model"
+    }
+  ]
+}
