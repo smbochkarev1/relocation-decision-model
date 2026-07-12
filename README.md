@@ -3,12 +3,21 @@
 [![tests](https://github.com/smbochkarev1/relocation-decision-model/actions/workflows/tests.yml/badge.svg)](https://github.com/smbochkarev1/relocation-decision-model/actions/workflows/tests.yml)
 &nbsp;![python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 &nbsp;![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)
+&nbsp;[![live demo](https://img.shields.io/badge/live%20demo-scoring%20%2B%20legalization-4f46e5.svg)](https://smbochkarev1.github.io/relocation-decision-model/)
 
 A small, configurable framework for choosing **where to relocate** with weighted
 multi-criteria scoring instead of gut feeling. You define the criteria that matter
 to *you*, weight them, score each candidate country 1–10, and the engine ranks
 them and stress-tests the result. Bring your own situation — nothing here is
 hard-coded to one person.
+
+### 🌐 [Open the interactive report →](https://smbochkarev1.github.io/relocation-decision-model/) · [view as a deck →](https://smbochkarev1.github.io/relocation-decision-model/deck/)
+
+A real worked example: **36 countries scored, joined with a sourced 2026 legalization overlay** (residence · golden visa · citizenship-by-investment · mortgage · naturalization) from a Russian-passport lens. Sortable ranking, an **"easy + safe"** shortlist, and a per-country drill-down with scoring bars, legalization routes and source links.
+
+[![Interactive relocation report — 36-country ranking with a legalization overlay](docs/hero.png)](https://smbochkarev1.github.io/relocation-decision-model/)
+
+> *Not immigration or investment advice; legalization facts are point-in-time (2026) — verify with a lawyer. The scores are one author's example weighting, not an objective ranking.*
 
 ---
 
@@ -72,6 +81,20 @@ out of the top and NATO members (Portugal, Spain) lead. Portugal and Spain are a
 coin-flip (0.01). The model's real output isn't "go to Georgia" — it's "your
 answer depends entirely on how much you weight geopolitical risk, so decide that
 first." Full write-up: [`examples/eu-relocation-couple/output/report.md`](examples/eu-relocation-couple/output/report.md).
+
+### Scoring + legalization overlay (the live report)
+
+The scoring answers *"is it a good fit?"* — but for a specific passport, the second
+question is *"can you actually get in?"*. The [interactive report](https://smbochkarev1.github.io/relocation-decision-model/)
+([and deck](https://smbochkarev1.github.io/relocation-decision-model/deck/)) joins the
+36-country ranking with a **sourced 2026 legalization review** — residence routes, golden
+visas, citizenship-by-investment, mortgage rules and naturalization timelines, from a
+Russian-passport lens — and derives an **"easy + safe"** shortlist (an open residence route
+× a high safety/stability score): *Portugal, Spain, UAE, Uruguay, Costa Rica, Croatia,
+Slovenia, Cyprus, Vietnam, Qatar, Bahrain*. The underlying dataset lives in
+[`docs/data/legalization.json`](docs/data/legalization.json); every legalization fact carries
+a source link. This overlay is a read-only companion to the scoring example — the scoring
+engine and config are unchanged.
 
 ## 4. Quickstart
 
@@ -191,6 +214,10 @@ relocation-decision-model/
 │       ├── scores.csv           #   36 countries, normalized 1–10 scores
 │       ├── knockouts.csv        #   demonstrates a filtered-out candidate
 │       └── output/              #   generated ranking.xlsx + report.md
+├── docs/                        # GitHub Pages: scoring + legalization overlay
+│   ├── index.html               #   interactive report (ranking + legalization drill-down)
+│   ├── deck/                    #   spec-to-deck presentation + .pptx
+│   └── data/legalization.json   #   sourced 2026 legalization dataset (39 countries)
 ├── PROMPT_FOR_CLAUDE.md         # interview script for the "hand it to Claude" flow
 └── LICENSE                      # MIT
 ```
