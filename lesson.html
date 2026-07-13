@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Lesson (B1) — Relocation, Visas & Citizenship</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#ffffff; --ink:#1d2733; --muted:#5b6b7c;
+    --brand:#2f6fed; --brand-dark:#1e4fb0; --accent:#e8f0ff;
+    --good:#1a8a5a; --good-bg:#e5f6ee; --bad:#c0392b; --bad-bg:#fdecea;
+    --line:#e3e8f0; --ru:#8a6d1f; --ru-bg:#fff7e0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 80px;}
+  header.top{background:linear-gradient(135deg,#2f6fed,#5a3ff0);color:#fff;border-radius:18px;
+    padding:28px 26px;box-shadow:0 8px 24px rgba(47,111,237,.25);}
+  header.top h1{margin:0 0 6px;font-size:26px;}
+  header.top p{margin:0;opacity:.95;font-size:15px;}
+  .lvl{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.5);
+    padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;margin-bottom:12px;letter-spacing:.5px;}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:22px 22px;margin:20px 0;box-shadow:0 2px 8px rgba(20,40,80,.04);}
+  h2{font-size:20px;margin:0 0 4px;display:flex;align-items:center;gap:10px;}
+  h2 .n{background:var(--accent);color:var(--brand-dark);border-radius:10px;
+    width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none;}
+  .sub{color:var(--muted);font-size:13.5px;margin:0 0 14px;}
+  .ru{color:var(--ru);background:var(--ru-bg);border-radius:6px;padding:0 5px;font-size:.92em;}
+  .note{background:var(--accent);border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;
+    font-size:14px;color:var(--ink);}
+  /* vocab cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:8px;}
+  .vc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;background:#fbfcfe;
+    transition:.15s;user-select:none;}
+  .vc:hover{border-color:var(--brand);box-shadow:0 3px 10px rgba(47,111,237,.12);}
+  .vc .w{font-weight:700;font-size:15px;}
+  .vc .ipa{color:var(--muted);font-size:12.5px;margin-left:4px;font-weight:400;}
+  .vc .tr{display:none;margin-top:6px;font-size:13.5px;}
+  .vc .tr .rus{color:var(--ru);font-weight:600;}
+  .vc .tr .def{color:var(--muted);display:block;margin-top:3px;}
+  .vc.open .tr{display:block;}
+  .vc .tap{color:var(--brand);font-size:11.5px;margin-top:6px;display:block;}
+  .vc.open .tap{display:none;}
+  .btn{background:var(--brand);color:#fff;border:none;border-radius:9px;padding:8px 16px;
+    font-size:14px;font-weight:600;cursor:pointer;}
+  .btn:hover{background:var(--brand-dark);}
+  .btn.ghost{background:#eef2f9;color:var(--brand-dark);}
+  .tools{display:flex;gap:8px;margin:14px 0 0;flex-wrap:wrap;}
+  /* reading */
+  .read p{margin:0 0 12px;}
+  .read .term{border-bottom:1px dotted var(--brand);cursor:help;}
+  table.mini{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  table.mini th,table.mini td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;}
+  table.mini th{background:var(--accent);color:var(--brand-dark);}
+  /* quiz */
+  .q{margin:0 0 16px;padding:0 0 4px;}
+  .q .stem{font-weight:600;margin-bottom:8px;}
+  .opt{display:block;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;
+    font-size:14px;transition:.12s;background:#fff;}
+  .opt:hover{border-color:var(--brand);}
+  .opt input{margin-right:9px;}
+  .opt.correct{background:var(--good-bg);border-color:var(--good);}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad);}
+  .fb{font-size:13.5px;margin-top:6px;font-weight:600;display:none;}
+  .fb.show{display:block;}
+  .fb.ok{color:var(--good);} .fb.no{color:var(--bad);}
+  /* gap fill */
+  .gap{margin:0 0 14px;font-size:14.5px;}
+  .gap input{border:1px solid var(--line);border-radius:7px;padding:6px 9px;font-size:14px;min-width:150px;}
+  .gap input.ok{border-color:var(--good);background:var(--good-bg);}
+  .gap input.no{border-color:var(--bad);background:var(--bad-bg);}
+  .gap .hint{color:var(--muted);font-size:12.5px;}
+  .score{font-weight:700;margin-top:12px;font-size:15px;}
+  /* match */
+  ul.clean{list-style:none;padding:0;margin:8px 0;}
+  ul.clean li{padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px;}
+  ul.clean li b{color:var(--brand-dark);}
+  .task{background:#fbfcfe;border:1px dashed var(--line);border-radius:12px;padding:14px 16px;margin:10px 0;}
+  .task h3{margin:0 0 6px;font-size:15px;}
+  .chip{display:inline-block;background:var(--accent);color:var(--brand-dark);border-radius:999px;
+    padding:2px 10px;font-size:12.5px;margin:3px 4px 0 0;font-weight:600;}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:24px;}
+  details.key{margin-top:8px;} details.key summary{cursor:pointer;color:var(--brand);font-weight:600;font-size:13.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="lvl">LEVEL B1 · ENGLISH</span>
+    <h1>Relocation, Visas &amp; Citizenship</h1>
+    <p>An English lesson built around your document <i>“Where to relocate — scoring + legalization (2026)”</i>. Learn the words, then read the tool with confidence.</p>
+  </header>
+
+  <div class="note" style="margin-top:20px;">
+    <b>How to use / Как заниматься:</b> Work top to bottom. <span class="ru">Нажимайте на карточки</span> to see translations, do the exercises, and press <b>Check</b> to see your answers. Everything works offline — nothing is saved, so you can redo it any time.
+  </div>
+
+  <!-- 1 OBJECTIVES -->
+  <section>
+    <h2><span class="n">0</span> Lesson goals</h2>
+    <p class="sub">Цели урока</p>
+    <ul class="clean">
+      <li>✅ Learn <b>25 key words</b> about moving abroad <span class="ru">(переезд, визы, гражданство)</span></li>
+      <li>✅ Read and understand the columns of your relocation table</li>
+      <li>✅ Talk and write about <b>where you would move and why</b></li>
+    </ul>
+  </section>
+
+  <!-- 2 VOCABULARY -->
+  <section>
+    <h2><span class="n">1</span> Key vocabulary</h2>
+    <p class="sub">Click / tap a card to flip it and see the Russian translation. <span class="ru">Нажмите на карточку, чтобы увидеть перевод.</span></p>
+    <div class="tools">
+      <button class="btn ghost" onclick="flipAll(true)">Show all translations</button>
+      <button class="btn ghost" onclick="flipAll(false)">Hide all</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <!-- 3 READING -->
+  <section>
+    <h2><span class="n">2</span> Reading: what the tool does</h2>
+    <p class="sub">Read this short B1 text. Hover over <span class="term">dotted words</span> for a quick meaning.</p>
+    <div class="read">
+      <p>Choosing where to <span class="term" title="переезжать в другую страну">relocate</span> is not easy. Many people who want to <span class="term" title="переехать за границу">move abroad</span> look at several <span class="term" title="критерии">criteria</span> before they decide. This document is a simple tool that helps you <span class="term" title="сравнивать">compare</span> countries. It gives each country a <span class="term" title="балл / оценка">score</span>, so you can see the results in one table.</p>
+
+      <p>The table has a few important columns. <b>Score</b> shows how good a country is in total — a higher score is better. <b>Passport / CBI</b> tells you if you can get a passport by <span class="term" title="гражданство за инвестиции">investment</span>. <b>Citizenship</b> shows how fast you can become a <span class="term" title="гражданин">citizen</span>; here, “fast” means five years or less. <b>Residence access</b> shows if it is easy or hard to get a <span class="term" title="вид на жительство (ВНЖ)">residence permit</span>.</p>
+
+      <p>The tool also uses simple labels. <b>“Easy + safe”</b> means the country is comfortable and <span class="term" title="безопасный">safe</span>. <b>“Open”</b> means people from a country can <span class="term" title="подать заявление">apply</span>, and <b>“closed”</b> means they cannot. You can click a column to <span class="term" title="сортировать">sort</span> the table, or click a row to see more details.</p>
+
+      <p>Of course, a tool like this cannot decide for you. It only helps you think clearly. In the end, you must choose the country that fits your life, your job, and your family.</p>
+    </div>
+
+    <div class="note" style="margin-top:6px;">
+      <b>Column glossary / Словарь колонок таблицы</b>
+      <table class="mini">
+        <tr><th>In the document</th><th>Meaning (English)</th><th>Перевод</th></tr>
+        <tr><td><b>Score</b></td><td>total points — higher is better</td><td>итоговый балл</td></tr>
+        <tr><td><b>Passport / CBI</b></td><td>Citizenship By Investment — a passport for money</td><td>гражданство за инвестиции</td></tr>
+        <tr><td><b>Citizenship ≤5y</b></td><td>you can become a citizen in five years or less</td><td>гражданство за ≤5 лет</td></tr>
+        <tr><td><b>Residence access</b></td><td>how easy it is to get a residence permit</td><td>доступ к ВНЖ</td></tr>
+        <tr><td><b>Open / Closed for RF</b></td><td>Russian citizens can / cannot apply</td><td>открыто / закрыто для граждан РФ</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4 COMPREHENSION -->
+  <section>
+    <h2><span class="n">3</span> Check your understanding</h2>
+    <p class="sub">Choose one answer. Then press Check. <span class="ru">Выберите ответ и нажмите Check.</span></p>
+    <div id="quiz"></div>
+    <button class="btn" onclick="checkQuiz()">Check answers</button>
+    <div class="score" id="quizScore"></div>
+  </section>
+
+  <!-- 5 GAP FILL -->
+  <section>
+    <h2><span class="n">4</span> Vocabulary in use — fill the gaps</h2>
+    <p class="sub">Type the missing word(s). Small spelling mistakes are OK. <span class="ru">Впишите пропущенные слова.</span></p>
+    <div id="gaps"></div>
+    <button class="btn" onclick="checkGaps()">Check</button>
+    <div class="score" id="gapScore"></div>
+  </section>
+
+  <!-- 6 MATCH -->
+  <section>
+    <h2><span class="n">5</span> Match the word to its meaning</h2>
+    <p class="sub">Read the definitions, then open the key to check yourself.</p>
+    <ul class="clean">
+      <li><b>1. residence permit</b> — a document that lets you live in a country legally</li>
+      <li><b>2. citizenship</b> — the legal status of being a full member of a country</li>
+      <li><b>3. eligible</b> — allowed to do or get something (you meet the rules)</li>
+      <li><b>4. requirements</b> — the things you must have or do to qualify</li>
+      <li><b>5. cost of living</b> — how much money you need for daily life</li>
+    </ul>
+    <p style="font-size:14px;margin:10px 0 4px;font-weight:600;">Now match these Russian words to the numbers above:</p>
+    <div id="matchGaps"></div>
+    <button class="btn" onclick="checkMatch()">Check</button>
+    <div class="score" id="matchScore"></div>
+  </section>
+
+  <!-- 7 GRAMMAR MINI -->
+  <section>
+    <h2><span class="n">6</span> Grammar spot: comparing countries</h2>
+    <p class="sub">The tool ranks countries, so you need <b>comparatives</b>. <span class="ru">Сравнительная степень.</span></p>
+    <div class="note">
+      short words: <b>safe → safer</b>, <b>cheap → cheaper</b> &nbsp;·&nbsp;
+      long words: <b>expensive → more expensive</b>, <b>affordable → more affordable</b> &nbsp;·&nbsp;
+      irregular: <b>good → better</b>, <b>bad → worse</b><br>
+      Pattern: <i>Portugal is <b>safer than</b> country X.</i> &nbsp; <i>Visas here are <b>more difficult than</b> before.</i>
+    </div>
+    <div id="grammar" style="margin-top:12px;"></div>
+    <button class="btn" onclick="checkGrammar()">Check</button>
+    <div class="score" id="grammarScore"></div>
+  </section>
+
+  <!-- 8 SPEAKING -->
+  <section>
+    <h2><span class="n">7</span> Speaking</h2>
+    <p class="sub">Say your answers out loud. Try to use the new words. <span class="ru">Говорите вслух, используйте новые слова.</span></p>
+    <div class="task">
+      <h3>Warm-up questions</h3>
+      <ul class="clean">
+        <li>• Which <b>three criteria</b> are the most important for you when you choose a country? Why?</li>
+        <li>• What is more important: a <b>fast citizenship</b> or a <b>low cost of living</b>?</li>
+        <li>• Would you ever move abroad? What would be the most difficult part?</li>
+      </ul>
+    </div>
+    <div class="task">
+      <h3>Mini-role play</h3>
+      <p style="margin:0;font-size:14px;">You talk to an immigration adviser. Ask three questions using: <span class="chip">apply for</span><span class="chip">requirements</span><span class="chip">residence permit</span><span class="chip">how long</span><br><i>Example: “What are the requirements to apply for a residence permit?”</i></p>
+    </div>
+  </section>
+
+  <!-- 9 WRITING -->
+  <section>
+    <h2><span class="n">8</span> Writing task</h2>
+    <p class="sub">Write 60–80 words. <span class="ru">Напишите короткий текст.</span></p>
+    <div class="task">
+      <h3>“The country I would like to relocate to”</h3>
+      <p style="margin:0 0 8px;font-size:14px;">Use <b>at least five</b> words from the lesson. Answer these questions:</p>
+      <ul class="clean" style="margin:0;">
+        <li>• Which country and why?</li>
+        <li>• What are your main criteria (safety, taxes, cost of living…)?</li>
+        <li>• Do you want a residence permit or full citizenship?</li>
+      </ul>
+      <div style="margin-top:8px;">
+        <span class="chip">relocate</span><span class="chip">criteria</span><span class="chip">safe</span><span class="chip">visa</span>
+        <span class="chip">residence permit</span><span class="chip">citizenship</span><span class="chip">apply for</span><span class="chip">cost of living</span>
+      </div>
+      <textarea id="essay" rows="6" style="width:100%;margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:14px;font-family:inherit;" placeholder="Start writing here..."></textarea>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:8px;">
+        <button class="btn ghost" onclick="countWords()">Count words</button>
+        <span id="wc" style="font-size:14px;color:var(--muted);"></span>
+      </div>
+      <details class="key">
+        <summary>Show a model answer</summary>
+        <p style="font-size:14px;margin-top:8px;">I would like to <b>relocate</b> to Portugal. My main <b>criteria</b> are safety and a good climate. It feels <b>safe</b>, and the <b>cost of living</b> is lower than in many big cities. First, I would <b>apply for</b> a <b>residence permit</b>. After a few years, I hope to get <b>citizenship</b>. My family is important to me, so I also want good schools and healthcare for my children. (68 words)</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    Based on your document <i>“Where to relocate — scoring + legalization (2026)”</i>. B1 self-study lesson · nothing is saved.
+  </footer>
+
+</div>
+
+<script>
+/* ---------- VOCABULARY ---------- */
+const VOCAB = [
+  ["relocation","/ˌriːloʊˈkeɪʃn/","переезд (в другую страну)","the act of moving to a new place to live"],
+  ["to relocate","/ˌriːloʊˈkeɪt/","переезжать","to move to a new country or city to live"],
+  ["to move abroad","/əˈbrɔːd/","переехать за границу","to go and live in another country"],
+  ["criteria","/kraɪˈtɪəriə/","критерии","the standards you use to judge or choose"],
+  ["score","/skɔːr/","балл, оценка","the number of points something gets"],
+  ["to rank","/ræŋk/","ранжировать","to put things in order from best to worst"],
+  ["safe / safety","/seɪf/","безопасный / безопасность","free from danger"],
+  ["visa","/ˈviːzə/","виза","official permission to enter a country"],
+  ["residence permit","/ˈrezɪdəns ˈpɜːmɪt/","вид на жительство (ВНЖ)","a document to live in a country legally"],
+  ["permanent residence","/ˈpɜːmənənt/","ПМЖ","the right to live somewhere with no time limit"],
+  ["citizenship","/ˈsɪtɪzənʃɪp/","гражданство","being a legal member of a country"],
+  ["passport","/ˈpɑːspɔːt/","паспорт","the document that proves your citizenship"],
+  ["citizenship by investment (CBI)","/ɪnˈvestmənt/","гражданство за инвестиции","getting a passport by paying / investing money"],
+  ["to apply for","/əˈplaɪ/","подавать заявление на","to formally ask for something (a visa, a job)"],
+  ["application","/ˌæplɪˈkeɪʃn/","заявление, заявка","the form or request you send"],
+  ["requirements","/rɪˈkwaɪəmənts/","требования","the things you must have or do to qualify"],
+  ["eligible","/ˈelɪdʒəbl/","имеющий право","allowed to get or do something"],
+  ["to legalize","/ˈliːɡəlaɪz/","легализовать (статус)","to make your stay official and legal"],
+  ["cost of living","/kɒst/","стоимость жизни","how much money daily life costs"],
+  ["income","/ˈɪnkʌm/","доход","the money you earn"],
+  ["taxes","/ˈtæksɪz/","налоги","money you pay to the government"],
+  ["healthcare","/ˈhelθkeər/","здравоохранение","medical services for people"],
+  ["to settle down","/ˈsetl/","обосноваться","to start a stable life in one place"],
+  ["affordable","/əˈfɔːdəbl/","доступный по цене","cheap enough to pay for"],
+  ["open / closed for","/ˈəʊpən/","открыто / закрыто для","people can / cannot apply"]
+];
+const cardsEl = document.getElementById('cards');
+VOCAB.forEach(([w,ipa,rus,def])=>{
+  const d=document.createElement('div'); d.className='vc';
+  d.innerHTML=`<div class="w">${w}<span class="ipa">${ipa}</span></div>
+    <span class="tap">tap to translate ▸</span>
+    <div class="tr"><span class="rus">${rus}</span><span class="def">${def}</span></div>`;
+  d.onclick=()=>d.classList.toggle('open');
+  cardsEl.appendChild(d);
+});
+function flipAll(open){document.querySelectorAll('.vc').forEach(c=>c.classList.toggle('open',open));}
+
+/* ---------- COMPREHENSION QUIZ ---------- */
+const QUIZ=[
+  {q:"What does a higher score mean?",
+   a:["The country is a worse choice.","The country is a better option overall.","The country is more expensive.","The country is far away."],c:1,
+   fb:"A higher score = a better option overall."},
+  {q:"In this tool, “fast citizenship” means…",
+   a:["one year or less.","ten years.","five years or less.","no citizenship at all."],c:2,
+   fb:"“Fast” here means five years or less (≤5y)."},
+  {q:"What does the label “closed” mean?",
+   a:["People cannot apply.","The country is dangerous.","The border is open.","Taxes are high."],c:0,
+   fb:"“Closed” means citizens of that country cannot apply."},
+  {q:"What can you do by clicking a column?",
+   a:["Delete the table.","Sort the table.","Buy a passport.","Change the language."],c:1,
+   fb:"Clicking a column sorts the table."},
+  {q:"Can the tool make the final decision for you?",
+   a:["Yes, it decides everything.","No, it only helps you compare.","Yes, it books your flight.","No, it does nothing useful."],c:1,
+   fb:"No — it only helps you compare and think clearly."}
+];
+const quizEl=document.getElementById('quiz');
+QUIZ.forEach((item,i)=>{
+  const wrap=document.createElement('div');wrap.className='q';
+  let html=`<div class="stem">${i+1}. ${item.q}</div>`;
+  item.a.forEach((opt,j)=>{
+    html+=`<label class="opt" id="q${i}o${j}"><input type="radio" name="q${i}" value="${j}">${opt}</label>`;
+  });
+  html+=`<div class="fb" id="fb${i}"></div>`;
+  wrap.innerHTML=html;quizEl.appendChild(wrap);
+});
+function checkQuiz(){
+  let s=0;
+  QUIZ.forEach((item,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const fb=document.getElementById('fb'+i);
+    item.a.forEach((_,j)=>{document.getElementById(`q${i}o${j}`).classList.remove('correct','wrong');});
+    document.getElementById(`q${i}o${item.c}`).classList.add('correct');
+    if(sel){
+      const v=+sel.value;
+      if(v===item.c){s++;fb.className='fb ok show';fb.textContent='✓ Correct. '+item.fb;}
+      else{document.getElementById(`q${i}o${v}`).classList.add('wrong');fb.className='fb no show';fb.textContent='✗ Not quite. '+item.fb;}
+    }else{fb.className='fb no show';fb.textContent='Please choose an answer. '+item.fb;}
+  });
+  document.getElementById('quizScore').textContent=`Score: ${s} / ${QUIZ.length}`;
+}
+
+/* ---------- GAP FILL ---------- */
+const GAPS=[
+  {t:"Before I move abroad, I compare the ___ of each country (safety, taxes…).",a:["criteria"],h:"критерии"},
+  {t:"You need a ___ ___ to live in a country legally for a long time.",a:["residence permit"],h:"вид на жительство"},
+  {t:"A passport that you get by investing money is called ___ by investment (CBI).",a:["citizenship"],h:"гражданство за инвестиции"},
+  {t:"This city is expensive; the cost of ___ is very high.",a:["living"],h:"стоимость жизни"},
+  {t:"Next month I will ___ ___ a work visa at the embassy.",a:["apply for"],h:"подать заявление на"},
+  {t:"After five years here, I hope to get full ___.",a:["citizenship"],h:"гражданство"}
+];
+const gapsEl=document.getElementById('gaps');
+GAPS.forEach((g,i)=>{
+  const d=document.createElement('div');d.className='gap';
+  d.innerHTML=`${i+1}. ${g.t.replace(/___( ___)?/,'<input id="g'+i+'" autocomplete="off">')}
+    &nbsp;<span class="hint">(${g.h})</span>`;
+  gapsEl.appendChild(d);
+});
+function norm(s){return s.toLowerCase().replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();}
+function checkGaps(){
+  let s=0;
+  GAPS.forEach((g,i)=>{
+    const inp=document.getElementById('g'+i);const val=norm(inp.value);
+    const ok=g.a.some(ans=>norm(ans)===val||val.includes(norm(ans)));
+    inp.classList.toggle('ok',ok);inp.classList.toggle('no',!ok);
+    if(ok)s++; else inp.value=inp.value;
+  });
+  const el=document.getElementById('gapScore');
+  el.textContent=`Score: ${s} / ${GAPS.length}. `+(s<GAPS.length?'Red = try again (answers: criteria · residence permit · citizenship · living · apply for · citizenship).':'Excellent! 🎉');
+}
+
+/* ---------- MATCH ---------- */
+const MATCH=[
+  {t:"вид на жительство → number",a:["1"]},
+  {t:"гражданство → number",a:["2"]},
+  {t:"имеющий право → number",a:["3"]},
+  {t:"требования → number",a:["4"]},
+  {t:"стоимость жизни → number",a:["5"]}
+];
+const mEl=document.getElementById('matchGaps');
+MATCH.forEach((m,i)=>{
+  const d=document.createElement('div');d.className='gap';
+  d.innerHTML=`${m.t.replace('number','<input id="m'+i+'" style="min-width:60px" maxlength="1" autocomplete="off">')}`;
+  mEl.appendChild(d);
+});
+function checkMatch(){
+  let s=0;
+  MATCH.forEach((m,i)=>{
+    const inp=document.getElementById('m'+i);const ok=m.a.includes(inp.value.trim());
+    inp.classList.toggle('ok',ok);inp.classList.toggle('no',!ok);if(ok)s++;
+  });
+  document.getElementById('matchScore').textContent=`Score: ${s} / ${MATCH.length}. `+(s===MATCH.length?'Perfect!':'Answers: 1,2,3,4,5.');
+}
+
+/* ---------- GRAMMAR ---------- */
+const GRAM=[
+  {t:"Portugal feels ___ (safe) than the big city.",a:["safer"]},
+  {t:"Living here is ___ (expensive) than before.",a:["more expensive"]},
+  {t:"This country is a ___ (good) choice than that one.",a:["better"]},
+  {t:"Small towns are usually ___ (affordable) than capitals.",a:["more affordable"]}
+];
+const gEl=document.getElementById('grammar');
+GRAM.forEach((g,i)=>{
+  const d=document.createElement('div');d.className='gap';
+  d.innerHTML=`${i+1}. ${g.t.replace('___','<input id="gr'+i+'" autocomplete="off">')}`;
+  gEl.appendChild(d);
+});
+function checkGrammar(){
+  let s=0;
+  GRAM.forEach((g,i)=>{
+    const inp=document.getElementById('gr'+i);const ok=g.a.some(a=>norm(a)===norm(inp.value));
+    inp.classList.toggle('ok',ok);inp.classList.toggle('no',!ok);if(ok)s++;
+  });
+  document.getElementById('grammarScore').textContent=`Score: ${s} / ${GRAM.length}. `+(s===GRAM.length?'Great comparatives! 👍':'Answers: safer · more expensive · better · more affordable.');
+}
+
+/* ---------- WORD COUNT ---------- */
+function countWords(){
+  const t=document.getElementById('essay').value.trim();
+  const n=t?t.split(/\s+/).length:0;
+  const el=document.getElementById('wc');
+  el.textContent=`${n} words `+(n>=60&&n<=90?'✓ good length':n<60?'— aim for 60–80':'— a bit long, aim for 60–80');
+}
+</script>
+</body>
+</html>
